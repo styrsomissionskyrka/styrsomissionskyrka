@@ -2,5 +2,14 @@
 	"root": "apps/styrsomissionskyrka",
 	"sourceRoot": "apps/styrsomissionskyrka",
 	"projectType": "application",
-	"tags": []
+	"tags": [],
+	"targets": {
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["apps/styrsomissionskyrka/**/*.{ts,tsx}"]
+			}
+		}
+	}
 }

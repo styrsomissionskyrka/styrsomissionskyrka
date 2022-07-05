@@ -2,7 +2,7 @@
 	"private": true,
 	"name": "@styrsomissionskyrka/styrsomissionskyrka",
 	"description": "",
-	"license": "",
+	"license": "MIT",
 	"scripts": {
 		"build": "npx remix build",
 		"dev": "npx remix dev",
@@ -21,9 +21,6 @@
 		"@types/react": "^17.0.24",
 		"@types/react-dom": "^17.0.9",
 		"typescript": "^4.6.4"
-	},
-	"engines": {
-		"node": ">=14"
 	},
 	"sideEffects": false
 }
