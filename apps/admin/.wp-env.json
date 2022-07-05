@@ -1,0 +1,9 @@
+{
+	"core": "./.wp",
+	"plugins": [],
+	"themes": ["."],
+	"config": {
+		"WP_LANG": "sv_SE",
+		"WP_DEFAULT_THEME": "styrsomissionskyrka-admin"
+	}
+}

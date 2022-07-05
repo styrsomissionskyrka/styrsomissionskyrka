@@ -4,48 +4,55 @@
 	"sourceRoot": "apps/admin/src",
 	"tags": [],
 	"targets": {
-		"build": {
-			"executor": "@nrwl/web:webpack",
-			"outputs": ["{options.outputPath}"],
-			"defaultConfiguration": "production",
+		"prepare": {
+			"executor": "nx:run-commands",
 			"options": {
-				"outputPath": "dist/apps/admin",
-				"compiler": "swc",
-				"index": "apps/admin/src/index.html",
-				"baseHref": "/",
-				"main": "apps/admin/src/main.ts",
-				"polyfills": "apps/admin/src/polyfills.ts",
-				"tsConfig": "apps/admin/tsconfig.app.json",
-				"assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
-				"styles": ["apps/admin/src/styles.css"],
-				"scripts": []
-			},
-			"configurations": {
-				"production": {
-					"fileReplacements": [
-						{
-							"replace": "apps/admin/src/environments/environment.ts",
-							"with": "apps/admin/src/environments/environment.prod.ts"
-						}
-					],
-					"optimization": true,
-					"outputHashing": "all",
-					"sourceMap": false,
-					"namedChunks": false,
-					"extractLicenses": true,
-					"vendorChunk": false
-				}
+				"command": "wp core download --path=.wp --version=latest",
+				"cwd": "apps/admin"
+			}
+		},
+		"build": {
+			"executor": "nx:run-commands",
+			"outputs": ["apps/admin/dist/**/*"],
+			"options": {
+				"command": "tsup",
+				"cwd": "apps/admin"
 			}
 		},
 		"serve": {
-			"executor": "@nrwl/web:dev-server",
+			"executor": "nx:run-commands",
 			"options": {
-				"buildTarget": "admin:build"
+				"command": "tsup --watch",
+				"cwd": "apps/admin"
 			},
-			"configurations": {
-				"production": {
-					"buildTarget": "admin:build:production"
-				}
+			"dependsOn": [{ "projects": "self", "target": "wp-start" }]
+		},
+		"wp-start": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "wp-env start --xdebug",
+				"cwd": "apps/admin"
+			}
+		},
+		"wp-stop": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "wp-env stop",
+				"cwd": "apps/admin"
+			}
+		},
+		"wp-clean": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "wp-env clean all",
+				"cwd": "apps/admin"
+			}
+		},
+		"wp-detroy": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "wp-env detroy",
+				"cwd": "apps/admin"
 			}
 		},
 		"lint": {
