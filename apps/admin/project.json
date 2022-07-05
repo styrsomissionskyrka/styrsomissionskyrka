@@ -55,12 +55,25 @@
         "cwd": "apps/admin"
       }
     },
-		"lint": {
-			"executor": "@nrwl/linter:eslint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": ["apps/admin/**/*.ts"]
-			}
-		}
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx run admin:lint-ts", "nx run admin:lint-php"]
+      }
+    },
+    "lint-ts": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/admin/**/*.ts"]
+      }
+    },
+    "lint-php": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "composer run lint",
+        "cwd": "apps/admin"
+      }
+    }
   }
 }
