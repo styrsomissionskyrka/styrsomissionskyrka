@@ -1,39 +1,39 @@
 {
-	"name": "styrsomissionskyrka/admin",
-	"description": "Styrsö Missionskyrka theme",
-	"type": "project",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Adam Bergman",
-			"email": "adam@fransvilhelm.com",
-			"homepage": "https://github.com/adambrgmn"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-			"StyrsoMissionskyrka\\": "./inc"
-		}
-	},
-	"config": {
-		"preferred-install": "dist",
-		"optimize-autoloader": true,
-		"sort-packages": true,
-		"allow-plugins": {
-			"squizlabs/php_codesniffer": true
-		}
-	},
-	"repositories": [],
-	"require": {
-		"stripe/stripe-php": "^7.111",
-		"tburry/pquery": "^1.1",
-		"hidehalo/nanoid-php": "^1.1"
-	},
-	"require-dev": {
-		"squizlabs/php_codesniffer": "3.*"
-	},
-	"scripts": {
-		"lint": "./vendor/bin/phpcs -p",
-		"lint:fix": "./vendor/bin/phpcbf -p"
-	}
+  "name": "styrsomissionskyrka/admin",
+  "description": "Styrsö Missionskyrka theme",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Adam Bergman",
+      "email": "adam@fransvilhelm.com",
+      "homepage": "https://github.com/adambrgmn"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "StyrsoMissionskyrka\\": "./inc"
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "allow-plugins": {
+      "squizlabs/php_codesniffer": true
+    }
+  },
+  "repositories": [],
+  "require": {
+    "stripe/stripe-php": "^7.111",
+    "tburry/pquery": "^1.1",
+    "hidehalo/nanoid-php": "^1.1"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.*"
+  },
+  "scripts": {
+    "lint": "./vendor/bin/phpcs -p",
+    "lint:fix": "./vendor/bin/phpcbf -p"
+  }
 }

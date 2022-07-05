@@ -1,60 +1,60 @@
 {
-	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"projectType": "application",
-	"sourceRoot": "apps/admin/src",
-	"tags": [],
-	"targets": {
-		"prepare": {
-			"executor": "nx:run-commands",
-			"options": {
-				"command": "wp core download --path=.wp --version=latest",
-				"cwd": "apps/admin"
-			}
-		},
-		"build": {
-			"executor": "nx:run-commands",
-			"outputs": ["apps/admin/dist/**/*"],
-			"options": {
-				"command": "tsup",
-				"cwd": "apps/admin"
-			}
-		},
-		"serve": {
-			"executor": "nx:run-commands",
-			"options": {
-				"command": "tsup --watch",
-				"cwd": "apps/admin"
-			},
-			"dependsOn": [{ "projects": "self", "target": "wp-start" }]
-		},
-		"wp-start": {
-			"executor": "nx:run-commands",
-			"options": {
-				"command": "wp-env start --xdebug",
-				"cwd": "apps/admin"
-			}
-		},
-		"wp-stop": {
-			"executor": "nx:run-commands",
-			"options": {
-				"command": "wp-env stop",
-				"cwd": "apps/admin"
-			}
-		},
-		"wp-clean": {
-			"executor": "nx:run-commands",
-			"options": {
-				"command": "wp-env clean all",
-				"cwd": "apps/admin"
-			}
-		},
-		"wp-detroy": {
-			"executor": "nx:run-commands",
-			"options": {
-				"command": "wp-env detroy",
-				"cwd": "apps/admin"
-			}
-		},
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/admin/src",
+  "tags": [],
+  "targets": {
+    "prepare": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "wp core download --path=.wp --version=latest",
+        "cwd": "apps/admin"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["apps/admin/dist/**/*"],
+      "options": {
+        "command": "tsup",
+        "cwd": "apps/admin"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsup --watch",
+        "cwd": "apps/admin"
+      },
+      "dependsOn": [{ "projects": "self", "target": "wp-start" }]
+    },
+    "wp-start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "wp-env start --xdebug",
+        "cwd": "apps/admin"
+      }
+    },
+    "wp-stop": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "wp-env stop",
+        "cwd": "apps/admin"
+      }
+    },
+    "wp-clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "wp-env clean all",
+        "cwd": "apps/admin"
+      }
+    },
+    "wp-detroy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "wp-env detroy",
+        "cwd": "apps/admin"
+      }
+    },
 		"lint": {
 			"executor": "@nrwl/linter:eslint",
 			"outputs": ["{options.outputFile}"],
@@ -62,5 +62,5 @@
 				"lintFilePatterns": ["apps/admin/**/*.ts"]
 			}
 		}
-	}
+  }
 }

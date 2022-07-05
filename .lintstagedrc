@@ -1,9 +1,9 @@
 {
-	"*.{js,ts,jsx,tsx,json,md,yml,html,php}": [
-		"prettier --write"
-	],
-	"{apps,libs}/**/*.{js,ts,jsx,tsx}": [
-		"nx format:write --files",
-		"nx affected:lint --fix --files"
-	]
+  "*.{js,ts,jsx,tsx,json,md,yml,html,php}": [
+    "prettier --write"
+  ],
+  "{apps,libs}/**/*.{js,ts,jsx,tsx}": [
+    "nx format:write --files",
+    "nx affected:lint --fix --files"
+  ]
 }

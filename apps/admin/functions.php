@@ -9,11 +9,11 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 function enqueue_scripts()
 {
-	\wp_enqueue_script(
-		'styrso-missionskyrka',
-		\get_template_directory_uri() . '/dist/admin.global.js',
-		[],
-		'1.0.0',
-		true
-	);
+  \wp_enqueue_script(
+    'styrso-missionskyrka',
+    \get_template_directory_uri() . '/dist/admin.global.js',
+    [],
+    '1.0.0',
+    true
+  );
 }

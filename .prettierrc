@@ -3,8 +3,6 @@
 	"trailingComma": "all",
 	"proseWrap": "always",
 	"printWidth": 120,
-	"useTabs": true,
-	"tabWidth": 2,
 	"importOrder": ["^node:(.*)$", "<THIRD_PARTY_MODULES>", "^@styrsomissionskyrka/(.*)$", "^[./]"],
 	"importOrderSeparation": true,
 	"importOrderSortSpecifiers": true

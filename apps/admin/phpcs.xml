@@ -10,6 +10,7 @@
 
   <!-- Ignore WordPress and Composer dependencies -->
   <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*/.wp/*</exclude-pattern>
   <exclude-pattern>*/node_modules/*</exclude-pattern>
   <exclude-pattern>*\.js</exclude-pattern>
 
@@ -20,8 +21,11 @@
   <arg value="ns"/>
 
   <rule ref="PSR2">
+    <exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect" />
+    <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact" />
     <exclude name="PSR1.Files.SideEffects.FoundWithSymbols" />
     <exclude name="PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace" />
+    <exclude name="PSR2.Methods.FunctionCallSignature.Indent" />
     <exclude name="Squiz.ControlStructures.ForEachLoopDeclaration.SpaceAfterOpen" />
     <exclude name="Squiz.ControlStructures.ForEachLoopDeclaration.SpaceBeforeClose" />
     <exclude name="Squiz.ControlStructures.ForEachLoopDeclaration.SpacingBeforeAs" />

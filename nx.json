@@ -1,56 +1,56 @@
 {
-	"$schema": "./node_modules/nx/schemas/nx-schema.json",
-	"npmScope": "styrsomissionskyrka",
-	"affected": {
-		"defaultBase": "main"
-	},
-	"implicitDependencies": {
-		"package.json": {
-			"dependencies": "*",
-			"devDependencies": "*"
-		},
-		".eslintrc.json": "*"
-	},
-	"tasksRunnerOptions": {
-		"default": {
-			"runner": "@nrwl/nx-cloud",
-			"options": {
-				"cacheableOperations": ["build", "lint", "test", "e2e"],
-				"accessToken": "ZWEwMjc1N2EtODVlMS00OGEyLThiMDYtNWZiZDgzM2I4M2ZjfHJlYWQtd3JpdGU="
-			}
-		}
-	},
-	"targetDefaults": {
-		"build": {
-			"dependsOn": ["^build"]
-		}
-	},
-	"targetDependencies": {
-		"dev": [
-			{
-				"target": "build",
-				"projects": "dependencies"
-			}
-		],
-		"start": [
-			{
-				"target": "build",
-				"projects": "self"
-			}
-		]
-	},
-	"defaultProject": "admin",
-	"generators": {
-		"@nrwl/web:application": {
-			"style": "css",
-			"linter": "eslint",
-			"unitTestRunner": "none",
-			"e2eTestRunner": "none"
-		},
-		"@nrwl/web:library": {
-			"style": "css",
-			"linter": "eslint",
-			"unitTestRunner": "none"
-		}
-	}
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "npmScope": "styrsomissionskyrka",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "ZWEwMjc1N2EtODVlMS00OGEyLThiMDYtNWZiZDgzM2I4M2ZjfHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
+    }
+  },
+  "targetDependencies": {
+    "dev": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ],
+    "start": [
+      {
+        "target": "build",
+        "projects": "self"
+      }
+    ]
+  },
+  "defaultProject": "admin",
+  "generators": {
+    "@nrwl/web:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "none",
+      "e2eTestRunner": "none"
+    },
+    "@nrwl/web:library": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "none"
+    }
+  }
 }
