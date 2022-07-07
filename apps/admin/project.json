@@ -7,8 +7,7 @@
     "prepare": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "wp core download --path=.wp --version=latest",
-        "cwd": "apps/admin"
+        "command": "bin/wp core download --path=apps/admin/.wp --version=latest"
       }
     },
     "build": {
