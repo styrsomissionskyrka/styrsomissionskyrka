@@ -1,0 +1,51 @@
+{
+  "root": "libs/wp-api",
+  "sourceRoot": "libs/wp-api/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/wp-api",
+        "main": "libs/wp-api/src/index.ts",
+        "tsConfig": "libs/wp-api/tsconfig.lib.json",
+        "assets": ["libs/wp-api/*.md"]
+      }
+    },
+    "generate": {
+      "executor": "nx:run-commands",
+      "outputs": ["libs/wp-api/generated"],
+      "options": {
+        "commands": [
+          "openapi --input {args.url}{args.path} --output ./src/generated/wp  --name WpClient --useOptions --useUnionTypes",
+          "node scripts/fix-broken-api-types.mjs"
+        ],
+        "parallel": false,
+        "cwd": "libs/wp-api",
+        "url": "http://localhost:8888",
+        "path": "/wp-json/document-generator-for-openapi/v1/document?namespace=wp/v2"
+      },
+      "configurations": {
+        "production": {
+          "url": "http://localhost:8888"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/wp-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/wp-api"],
+      "options": {
+        "jestConfig": "libs/wp-api/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

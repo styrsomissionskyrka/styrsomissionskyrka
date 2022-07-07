@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "styrsomissionskyrka": "apps/styrsomissionskyrka",
-    "styrsomissionskyrka-admin": "apps/styrsomissionskyrka-admin"
+    "styrsomissionskyrka-admin": "apps/styrsomissionskyrka-admin",
+    "wp-api": "libs/wp-api"
   }
 }
