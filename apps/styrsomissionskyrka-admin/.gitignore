@@ -1,4 +1,4 @@
 .wp
 dist
 *.mo
-inc/utils/AssetLoader.php
+AssetLoader.php
