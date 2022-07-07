@@ -2,7 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "admin": "apps/admin",
-    "styrsomissionskyrka": "apps/styrsomissionskyrka"
+    "styrsomissionskyrka": "apps/styrsomissionskyrka",
+    "styrsomissionskyrka-admin": "apps/styrsomissionskyrka-admin"
   }
 }

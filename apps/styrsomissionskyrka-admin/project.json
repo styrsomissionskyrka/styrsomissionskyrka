@@ -1,21 +1,26 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/admin/src",
+  "sourceRoot": "apps/styrsomissionskyrka-admin/src",
   "tags": [],
   "targets": {
     "prepare": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "bin/wp core download --path=apps/admin/.wp --version=latest"
+        "command": "bin/wp core download --path=apps/styrsomissionskyrka-admin/.wp --version=latest"
       }
     },
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["dist/apps/admin"],
+      "outputs": [
+        "dist/apps/styrsomissionskyrka-admin"
+      ],
       "options": {
-        "commands": ["wp-bundler", "node scripts/package.mjs"],
-        "cwd": "apps/admin",
+        "commands": [
+          "wp-bundler",
+          "node scripts/package.mjs"
+        ],
+        "cwd": "apps/styrsomissionskyrka-admin",
         "parallel": false
       }
     },
@@ -23,55 +28,62 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-bundler --watch",
-        "cwd": "apps/admin"
+        "cwd": "apps/styrsomissionskyrka-admin"
       }
     },
     "wp-start": {
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-env start --xdebug",
-        "cwd": "apps/admin"
+        "cwd": "apps/styrsomissionskyrka-admin"
       }
     },
     "wp-stop": {
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-env stop",
-        "cwd": "apps/admin"
+        "cwd": "apps/styrsomissionskyrka-admin"
       }
     },
     "wp-clean": {
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-env clean all",
-        "cwd": "apps/admin"
+        "cwd": "apps/styrsomissionskyrka-admin"
       }
     },
     "wp-detroy": {
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-env detroy",
-        "cwd": "apps/admin"
+        "cwd": "apps/styrsomissionskyrka-admin"
       }
     },
     "lint": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["nx run admin:lint-ts", "nx run admin:lint-php"]
+        "commands": [
+          "nx run admin:lint-ts",
+          "nx run admin:lint-php"
+        ]
       }
     },
     "lint-ts": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/admin/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/styrsomissionskyrka-admin/**/*.ts"
+        ]
       }
     },
     "lint-php": {
       "executor": "nx:run-commands",
       "options": {
         "command": "composer run lint",
-        "cwd": "apps/admin"
+        "cwd": "apps/styrsomissionskyrka-admin"
       }
     }
   }

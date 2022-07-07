@@ -6,7 +6,7 @@ import { globbySync } from 'globby';
 
 (() => {
   let cwd = process.cwd();
-  let zipPath = join(cwd, '../../dist/apps/admin/styrsomissionskyrka.zip');
+  let zipPath = join(cwd, '../../dist/apps/styrsomissionskyrka-admin/styrsomissionskyrka.zip');
   let items = globbySync([
     '*.php',
     'style.css',
