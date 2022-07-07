@@ -2,6 +2,7 @@
 
 namespace StyrsoMissionskyrka;
 
+use StyrsoMissionskyrka\Utils\AssetLoader;
 use StyrsoMissionskyrka\Utils\HooksManager;
 
 require_once __DIR__ . '/inc/polyfills.php';

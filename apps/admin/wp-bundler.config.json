@@ -6,8 +6,8 @@
   "sourcemap": true,
   "externals": {},
   "assetLoader": {
-    "path": "inc/AssetLoader.php",
-    "namespace": "StyrsoMissionskyrka"
+    "path": "inc/utils/AssetLoader.php",
+    "namespace": "StyrsoMissionskyrka\\Utils"
   },
   "translations": {
     "domain": "smk",
