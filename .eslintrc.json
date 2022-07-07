@@ -4,7 +4,7 @@
   "plugins": ["@nrwl/nx"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs"],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
@@ -29,7 +29,7 @@
       }
     },
     {
-      "files": ["*.js", "*.jsx"],
+      "files": ["*.js", "*.jsx", "*.mjs"],
       "extends": ["plugin:@nrwl/nx/javascript"],
       "rules": {
         "prefer-const": "off"

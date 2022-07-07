@@ -1,0 +1,4 @@
+.wp
+dist
+*.mo
+inc/AssetLoader.php

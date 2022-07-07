@@ -12,19 +12,19 @@
     },
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["apps/admin/dist/**/*"],
+      "outputs": ["dist/apps/admin"],
       "options": {
-        "command": "tsup",
-        "cwd": "apps/admin"
+        "commands": ["wp-bundler", "node scripts/package.mjs"],
+        "cwd": "apps/admin",
+        "parallel": false
       }
     },
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsup --watch",
+        "command": "wp-bundler --watch",
         "cwd": "apps/admin"
-      },
-      "dependsOn": [{ "projects": "self", "target": "wp-start" }]
+      }
     },
     "wp-start": {
       "executor": "nx:run-commands",

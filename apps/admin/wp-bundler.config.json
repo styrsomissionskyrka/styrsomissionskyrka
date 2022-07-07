@@ -1,0 +1,17 @@
+{
+  "entryPoints": {
+    "admin": "src/admin.ts"
+  },
+  "outdir": "dist",
+  "sourcemap": true,
+  "externals": {},
+  "assetLoader": {
+    "path": "inc/AssetLoader.php",
+    "namespace": "StyrsoMissionskyrka"
+  },
+  "translations": {
+    "domain": "smk",
+    "pot": "languages/theme.pot",
+    "pos": ["languages/sv_SE.po", "languages/en_US.po"]
+  }
+}
