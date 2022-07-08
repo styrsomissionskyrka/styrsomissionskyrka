@@ -30,7 +30,14 @@ async function main() {
 
   let interfaces = [...entities.values(), ...args.values()].map((config) => config.source);
 
-  fs.writeFileSync(path.join(process.cwd(), 'src/generated/types.ts'), interfaces.join('\n\n') + '\n');
+  let typesPath = path.join(process.cwd(), 'src/generated/types.ts');
+  try {
+    fs.mkdirSync(path.dirname(typesPath), { recursive: true });
+  } catch (err) {
+    // void
+  }
+
+  fs.writeFileSync(typesPath, interfaces.join('\n\n') + '\n');
   console.log('Types generated in src/generated/types.ts');
 }
 

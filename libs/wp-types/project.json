@@ -3,14 +3,12 @@
   "sourceRoot": "libs/wp-types/src",
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "executor": "nx:run-commands",
+      "outputs": [],
       "options": {
-        "outputPath": "dist/libs/wp-types",
-        "main": "libs/wp-types/src/index.ts",
-        "tsConfig": "libs/wp-types/tsconfig.lib.json",
-        "assets": ["libs/wp-types/*.md"]
-      }
+        "command": "echo 'Placeholder command'"
+      },
+      "dependsOn": [{ "target": "generate", "projects": "self" }]
     },
     "generate": {
       "executor": "nx:run-commands",
@@ -18,11 +16,6 @@
       "options": {
         "command": "node -r esbuild-register scripts/generate-api.ts",
         "cwd": "libs/wp-types"
-      },
-      "configurations": {
-        "production": {
-          "url": "http://localhost:8888"
-        }
       }
     },
     "lint": {
