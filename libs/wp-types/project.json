@@ -1,23 +1,23 @@
 {
-  "root": "libs/wp-api",
-  "sourceRoot": "libs/wp-api/src",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/wp-types/src",
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/wp-api",
-        "main": "libs/wp-api/src/index.ts",
-        "tsConfig": "libs/wp-api/tsconfig.lib.json",
-        "assets": ["libs/wp-api/*.md"]
+        "outputPath": "dist/libs/wp-types",
+        "main": "libs/wp-types/src/index.ts",
+        "tsConfig": "libs/wp-types/tsconfig.lib.json",
+        "assets": ["libs/wp-types/*.md"]
       }
     },
     "generate": {
       "executor": "nx:run-commands",
-      "outputs": ["libs/wp-api/generated"],
+      "outputs": ["libs/wp-types/generated"],
       "options": {
         "command": "node -r esbuild-register scripts/generate-api.ts",
-        "cwd": "libs/wp-api"
+        "cwd": "libs/wp-types"
       },
       "configurations": {
         "production": {
@@ -29,14 +29,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/wp-api/**/*.ts"]
+        "lintFilePatterns": ["libs/wp-types/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/wp-api"],
+      "outputs": ["coverage/libs/wp-types"],
       "options": {
-        "jestConfig": "libs/wp-api/jest.config.js",
+        "jestConfig": "libs/wp-types/jest.config.js",
         "passWithNoTests": true
       }
     }

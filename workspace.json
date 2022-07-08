@@ -4,6 +4,6 @@
   "projects": {
     "styrsomissionskyrka": "apps/styrsomissionskyrka",
     "styrsomissionskyrka-admin": "apps/styrsomissionskyrka-admin",
-    "wp-api": "libs/wp-api"
+    "wp-types": "libs/wp-types"
   }
 }
