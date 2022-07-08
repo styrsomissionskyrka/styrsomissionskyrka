@@ -16,14 +16,8 @@
       "executor": "nx:run-commands",
       "outputs": ["libs/wp-api/generated"],
       "options": {
-        "commands": [
-          "openapi --input {args.url}{args.path} --output ./src/generated/wp  --name WpClient --useOptions --useUnionTypes",
-          "node scripts/fix-broken-api-types.mjs"
-        ],
-        "parallel": false,
-        "cwd": "libs/wp-api",
-        "url": "http://localhost:8888",
-        "path": "/wp-json/document-generator-for-openapi/v1/document?namespace=wp/v2"
+        "command": "node -r esbuild-register scripts/generate-api.ts",
+        "cwd": "libs/wp-api"
       },
       "configurations": {
         "production": {

@@ -1,3 +1,1 @@
-import { WpClient } from './generated/wp';
-
-export const wp = new WpClient();
+export * from './generated/types';
