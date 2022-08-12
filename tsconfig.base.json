@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "strict": true,
     "baseUrl": ".",
+    "jsx": "react-jsx",
     "paths": {
       "@smk/wp-types": ["libs/wp-types/src/index.ts"]
     }

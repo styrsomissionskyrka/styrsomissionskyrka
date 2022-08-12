@@ -15,7 +15,9 @@
 </head>
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
-  <p>Hello world</p>
+  <ul>
+    <li><a href="<?php echo admin_url(); ?>">Admin</a></li>
+  </ul>
   <?php wp_footer(); ?>
 </body>
 </html>

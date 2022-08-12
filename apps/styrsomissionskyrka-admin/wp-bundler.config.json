@@ -1,12 +1,13 @@
 {
   "entryPoints": {
-    "admin": "src/admin.ts"
+    "admin": "src/admin.ts",
+    "plugin-stripe": "src/plugins/stripe/index.ts"
   },
   "outdir": "dist",
   "sourcemap": true,
   "externals": {},
   "assetLoader": {
-    "path": "inc/utils/AssetLoader.php",
+    "path": "inc/Utils/AssetLoader.php",
     "namespace": "StyrsoMissionskyrka\\Utils"
   },
   "translations": {

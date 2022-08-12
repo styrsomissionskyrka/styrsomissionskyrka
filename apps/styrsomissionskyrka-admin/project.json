@@ -47,10 +47,10 @@
         "cwd": "apps/styrsomissionskyrka-admin"
       }
     },
-    "wp-detroy": {
+    "wp-destroy": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "wp-env detroy",
+        "command": "wp-env destroy",
         "cwd": "apps/styrsomissionskyrka-admin"
       }
     },
