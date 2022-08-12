@@ -2,7 +2,6 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "styrsomissionskyrka-admin": "apps/styrsomissionskyrka-admin",
-    "wp-types": "libs/wp-types"
+    "styrsomissionskyrka-admin": "apps/styrsomissionskyrka-admin"
   }
 }
