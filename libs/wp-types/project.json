@@ -8,7 +8,12 @@
       "options": {
         "command": "echo 'Placeholder command'"
       },
-      "dependsOn": [{ "target": "generate", "projects": "self" }]
+      "dependsOn": [
+        {
+          "target": "generate",
+          "projects": "self"
+        }
+      ]
     },
     "generate": {
       "executor": "nx:run-commands",
