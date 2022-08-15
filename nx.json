@@ -39,7 +39,7 @@
       }
     ]
   },
-  "defaultProject": "styrsomissionskyrka-admin",
+  "defaultProject": "admin",
   "generators": {
     "@nrwl/web:application": {
       "style": "css",

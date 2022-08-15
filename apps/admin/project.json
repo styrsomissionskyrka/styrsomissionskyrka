@@ -1,21 +1,22 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/styrsomissionskyrka-admin/src",
+  "sourceRoot": "apps/admin/src",
   "tags": [],
   "targets": {
     "prepare": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "bin/wp core download --path=apps/styrsomissionskyrka-admin/.wp --version=latest"
+        "commands": ["rm -rf .wp", "bin/wp core download --path=.wp --version=latest"],
+        "cwd": "apps/admin"
       }
     },
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["dist/apps/styrsomissionskyrka-admin"],
+      "outputs": ["dist/apps/admin"],
       "options": {
         "commands": ["wp-bundler", "node scripts/package.mjs"],
-        "cwd": "apps/styrsomissionskyrka-admin",
+        "cwd": "apps/admin",
         "parallel": false
       }
     },
@@ -23,49 +24,49 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-bundler --watch",
-        "cwd": "apps/styrsomissionskyrka-admin"
+        "cwd": "apps/admin"
       }
     },
     "wp-start": {
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-env start --xdebug",
-        "cwd": "apps/styrsomissionskyrka-admin"
+        "cwd": "apps/admin"
       }
     },
     "wp-stop": {
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-env stop",
-        "cwd": "apps/styrsomissionskyrka-admin"
+        "cwd": "apps/admin"
       }
     },
     "wp-clean": {
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-env clean all",
-        "cwd": "apps/styrsomissionskyrka-admin"
+        "cwd": "apps/admin"
       }
     },
     "wp-destroy": {
       "executor": "nx:run-commands",
       "options": {
         "command": "wp-env destroy",
-        "cwd": "apps/styrsomissionskyrka-admin"
+        "cwd": "apps/admin"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/styrsomissionskyrka-admin/**/*.ts"]
+        "lintFilePatterns": ["apps/admin/**/*.ts"]
       }
     },
     "lint-php": {
       "executor": "nx:run-commands",
       "options": {
         "command": "composer run lint",
-        "cwd": "apps/styrsomissionskyrka-admin"
+        "cwd": "apps/admin"
       }
     }
   }

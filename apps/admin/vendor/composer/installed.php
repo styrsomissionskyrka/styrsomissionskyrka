@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'cbf880225030cd77add000f9ea7e9c5a5a67f5b6',
+        'reference' => '7616934e2bc5507633a6a7535f4d2a0d9bb4d3ff',
         'name' => 'styrsomissionskyrka/admin',
         'dev' => true,
     ),
@@ -52,7 +52,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'cbf880225030cd77add000f9ea7e9c5a5a67f5b6',
+            'reference' => '7616934e2bc5507633a6a7535f4d2a0d9bb4d3ff',
             'dev_requirement' => false,
         ),
         'tburry/pquery' => array(
