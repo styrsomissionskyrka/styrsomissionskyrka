@@ -16,6 +16,6 @@ $stripe_client = new \Stripe\StripeClient(STRIPE_SECRET_KEY);
 $manager = new HooksManager();
 
 $manager->register(new Core());
-$manager->register(new PostTypes\Retreat\Api($stripe_client));
-$manager->register(new PostTypes\Retreat\Editor());
-$manager->register(new PostTypes\Retreat\PostType());
+$manager->register(new Features\Retreats\Api($stripe_client));
+$manager->register(new Features\Retreats\Editor());
+$manager->register(new Features\Retreats\PostType());

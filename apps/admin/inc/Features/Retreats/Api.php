@@ -1,6 +1,6 @@
 <?php
 
-namespace StyrsoMissionskyrka\PostTypes\Retreat;
+namespace StyrsoMissionskyrka\Features\Retreats;
 
 use StyrsoMissionskyrka\Utils\ActionHookSubscriber;
 
