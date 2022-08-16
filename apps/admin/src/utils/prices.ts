@@ -12,9 +12,18 @@ export function amountToCents(price: number) {
 
 export function formatPrice(price: number, currency?: string) {
   let instance = new Intl.NumberFormat(window.site_locale, {
-    style: currency != null ? 'currency' : 'decimal',
-    currency,
+    style: 'currency',
+    currency: currency ?? 'USD',
   });
+
+  if (currency == null) {
+    let parts = instance.formatToParts(centsToAmount(price));
+    return parts.reduce((acc, part) => {
+      if (part.type === 'currency') return acc;
+      return acc + part.value;
+    }, '');
+  }
+
   return instance.format(centsToAmount(price));
 }
 

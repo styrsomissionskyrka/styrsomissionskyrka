@@ -10,6 +10,7 @@ import {
   TextareaControl,
 } from '@wordpress/components';
 import { PluginSidebar } from '@wordpress/edit-post';
+import { __ } from '@wordpress/i18n';
 import equal from 'fast-deep-equal';
 import React, { Fragment, useState } from 'react';
 
@@ -24,7 +25,7 @@ export const Plugin: React.FC<{ name: string; icon: Dashicon.Icon }> = ({ name, 
   let [postId] = useRetreatAttribute('id');
 
   return (
-    <PluginSidebar name={name} title="Edit prices" icon={icon}>
+    <PluginSidebar name={name} title={__('Prices', 'smk')} icon={icon}>
       <QueryClientProvider>
         <Sidebar postId={postId} />
       </QueryClientProvider>
@@ -111,12 +112,14 @@ const SectionHead: React.FC<{ addProduct: () => void; hasMoreThanOne: boolean }>
   return (
     <Flex direction="column" gap={4} style={{ padding: 12, marginBlockEnd: 12 }}>
       <FlexItem>
-        Below you can edit and add new prices. E.g. if there should be a different/special price for students or
-        similar.
+        {__(
+          'Below you can edit and add new prices. E.g. if there should be a different/special price for students or similar.',
+          'smk',
+        )}
       </FlexItem>
       <FlexItem>
         <Button variant="secondary" onClick={addProduct}>
-          Add {hasMoreThanOne ? 'new' : 'first'} price
+          {hasMoreThanOne ? __('Add new price', 'smk') : __('Add first price', 'smk')}
         </Button>
       </FlexItem>
     </Flex>
@@ -160,7 +163,7 @@ const ProductSection: React.FC<{
         (
           <Fragment>
             <span style={{ color: product != null && !product.active ? 'gray' : undefined }}>
-              {product?.name ?? 'New product'}
+              {product?.name ?? __('New price', 'smk')}
             </span>
             <span style={{ fontWeight: 400, marginLeft: 4, flex: 'none' }}>
               ({formatPrice(proxy.price, product?.default_price?.currency ?? 'sek')}){' '}
@@ -169,27 +172,27 @@ const ProductSection: React.FC<{
           </Fragment>
         ) as unknown as string
       }
-      initialOpen={product != null}
+      initialOpen={product == null}
     >
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="product_id" value={product?.id ?? '__new__'} />
         <TextControl
           name="product_name"
-          label="Name"
+          label={__('Name', 'smk')}
           value={proxy.name}
           onChange={(value) => updateProduct('name', value)}
         />
 
         <TextareaControl
           name="product_description"
-          label="Description"
+          label={__('Description', 'smk')}
           value={proxy.description}
           onChange={(value) => updateProduct('description', value)}
         />
 
         <PriceControl
           name="product_price"
-          label="Price"
+          label={__('Price', 'smk')}
           value={proxy.price}
           currency={product?.default_price?.currency ?? 'sek'}
           onChange={(value) => updateProduct('price', Number(value))}
@@ -198,23 +201,23 @@ const ProductSection: React.FC<{
         <Flex justify="flex-end">
           <ButtonGroup>
             <Button type="submit" variant="secondary" isSmall disabled={!isDirty}>
-              Save changes
+              {__('Save changes', 'smk')}
             </Button>
             {product != null && product.active && onDeactivate != null ? (
               <Button type="button" variant="secondary" isDestructive isSmall onClick={() => onDeactivate(product.id)}>
-                Deactive price
+                {__('Deactive price', 'smk')}
               </Button>
             ) : null}
 
             {product != null && !product.active && onActivate != null ? (
               <Button type="button" variant="secondary" isSmall onClick={() => onActivate(product.id)}>
-                Activate price
+                {__('Activate price', 'smk')}
               </Button>
             ) : null}
 
             {product == null && onCancelNew != null ? (
               <Button type="button" variant="secondary" isDestructive isSmall onClick={() => onCancelNew()}>
-                Cancel
+                {__('Cancel', 'smk')}
               </Button>
             ) : null}
           </ButtonGroup>

@@ -7,73 +7,125 @@ msgstr ""
 "X-Domain: smk\n"
 "Language: sv_SE\n"
 
+#: src/editor-plugins/stripe/Plugin.tsx:214
+msgid "Activate price"
+msgstr "Aktivera pris"
+
 #: style.css:4
 #. translators: Author of the theme
 msgid "Adam Bergman"
-msgstr ""
+msgstr "Adam Bergman"
 
-#: inc/PostTypes/Retreat/PostType.php:23
+#: src/editor-plugins/stripe/Plugin.tsx:122
+msgid "Add first price"
+msgstr "Lägg till ett första pris"
+
+#: inc/Features/Retreats/PostType.php:23
 msgid "Add New"
-msgstr ""
+msgstr "Lägg till ny"
 
-#: inc/PostTypes/Retreat/PostType.php:24
+#: src/editor-plugins/stripe/Plugin.tsx:122
+msgid "Add new price"
+msgstr "Lägg till nytt pris"
+
+#: inc/Features/Retreats/PostType.php:24
 msgid "Add New Retreat"
-msgstr ""
+msgstr "Lägg till ny retreat"
 
-#: inc/PostTypes/Retreat/PostType.php:25
-msgid "Edit Retreat"
+#: src/editor-plugins/stripe/Plugin.tsx:115
+msgid ""
+"Below you can edit and add new prices. E.g. if there should be a different/special price for students or "
+"similar."
 msgstr ""
+"Här nedanför kan du redigera och lägga till nya priser. Exempelvis om det ska finnas ett speciellt pris för "
+"studenter eller pensionärer."
+
+#: src/editor-plugins/stripe/Plugin.tsx:220
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/editor-plugins/stripe/Plugin.tsx:208
+msgid "Deactive price"
+msgstr "Avaktivera pris"
+
+#: src/editor-plugins/stripe/Plugin.tsx:188
+msgid "Description"
+msgstr "Beskrivning"
+
+#: inc/Features/Retreats/PostType.php:25
+msgid "Edit Retreat"
+msgstr "Redigera retreat"
 
 #: style.css:5
 #. translators: Author URI of the theme
 msgid "https://github.com/adambrgmn"
-msgstr ""
+msgstr "https://github.com/adambrgmn"
 
 #: style.css:3
 #. translators: Theme URI of the theme
 msgid "https://www.styrsomissionskyrka.se"
-msgstr ""
+msgstr "https://www.styrsomissionskyrka.se"
 
-#: inc/PostTypes/Retreat/PostType.php:26
+#: src/editor-plugins/stripe/Plugin.tsx:181
+msgid "Name"
+msgstr "Namn"
+
+#: src/editor-plugins/stripe/Plugin.tsx:166
+msgid "New price"
+msgstr "Nytt pris"
+
+#: inc/Features/Retreats/PostType.php:26
 msgid "New Retreat"
-msgstr ""
+msgstr "Ny retreat"
 
-#: inc/PostTypes/Retreat/PostType.php:29
+#: inc/Features/Retreats/PostType.php:29
 msgid "No Retreats found"
-msgstr ""
+msgstr "Inga retreater funna"
 
-#: inc/PostTypes/Retreat/PostType.php:30
+#: inc/Features/Retreats/PostType.php:30
 msgid "No Retreats found in Trash"
-msgstr ""
+msgstr "Inga retreater funna i papperskorgen"
 
-#: inc/PostTypes/Retreat/PostType.php:31
+#: inc/Features/Retreats/PostType.php:31
 msgid "Parent Retreat:"
-msgstr ""
+msgstr "Överordnad retreat:"
 
-#: inc/PostTypes/Retreat/PostType.php:22
+#: src/editor-plugins/stripe/Plugin.tsx:195
+msgid "Price"
+msgstr "Pris"
+
+#: src/editor-plugins/stripe/Plugin.tsx:28
+msgid "Prices"
+msgstr "Priser"
+
+#: inc/Features/Retreats/PostType.php:22
 msgid "Retreat"
-msgstr ""
+msgstr "Retreat"
 
-#: inc/PostTypes/Retreat/PostType.php:38
+#: inc/Features/Retreats/PostType.php:38
 msgid "Retreat offerings"
-msgstr ""
+msgstr "Retreaterbjudanden"
 
-#: inc/PostTypes/Retreat/PostType.php:21
-#: inc/PostTypes/Retreat/PostType.php:32
+#: inc/Features/Retreats/PostType.php:21
+#: inc/Features/Retreats/PostType.php:32
 msgid "Retreats"
-msgstr ""
+msgstr "Retreater"
 
-#: inc/PostTypes/Retreat/PostType.php:28
+#: src/editor-plugins/stripe/Plugin.tsx:204
+msgid "Save changes"
+msgstr "Spara ändringar"
+
+#: inc/Features/Retreats/PostType.php:28
 msgid "Search Retreats"
-msgstr ""
+msgstr "Sök retreater"
 
 #: style.css:2
 #: style.css:6
 #. translators: Description of the theme
 #. translators: Theme Name of the theme
 msgid "Styrsö Missionskyrka Admin"
-msgstr ""
+msgstr "Styrsö Missionskyrka Admin"
 
-#: inc/PostTypes/Retreat/PostType.php:27
+#: inc/Features/Retreats/PostType.php:27
 msgid "View Retreat"
-msgstr ""
+msgstr "Visa retreat"

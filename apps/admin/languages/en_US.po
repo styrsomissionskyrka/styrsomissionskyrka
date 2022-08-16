@@ -7,20 +7,50 @@ msgstr ""
 "X-Domain: smk\n"
 "Language: en_US\n"
 
+#: src/editor-plugins/stripe/Plugin.tsx:214
+msgid "Activate price"
+msgstr ""
+
 #: style.css:4
 #. translators: Author of the theme
 msgid "Adam Bergman"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:23
+#: src/editor-plugins/stripe/Plugin.tsx:122
+msgid "Add first price"
+msgstr ""
+
+#: inc/Features/Retreats/PostType.php:23
 msgid "Add New"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:24
+#: src/editor-plugins/stripe/Plugin.tsx:122
+msgid "Add new price"
+msgstr ""
+
+#: inc/Features/Retreats/PostType.php:24
 msgid "Add New Retreat"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:25
+#: src/editor-plugins/stripe/Plugin.tsx:115
+msgid ""
+"Below you can edit and add new prices. E.g. if there should be a different/special price for students or "
+"similar."
+msgstr ""
+
+#: src/editor-plugins/stripe/Plugin.tsx:220
+msgid "Cancel"
+msgstr ""
+
+#: src/editor-plugins/stripe/Plugin.tsx:208
+msgid "Deactive price"
+msgstr ""
+
+#: src/editor-plugins/stripe/Plugin.tsx:188
+msgid "Description"
+msgstr ""
+
+#: inc/Features/Retreats/PostType.php:25
 msgid "Edit Retreat"
 msgstr ""
 
@@ -34,36 +64,56 @@ msgstr ""
 msgid "https://www.styrsomissionskyrka.se"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:26
+#: src/editor-plugins/stripe/Plugin.tsx:181
+msgid "Name"
+msgstr ""
+
+#: src/editor-plugins/stripe/Plugin.tsx:166
+msgid "New price"
+msgstr ""
+
+#: inc/Features/Retreats/PostType.php:26
 msgid "New Retreat"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:29
+#: inc/Features/Retreats/PostType.php:29
 msgid "No Retreats found"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:30
+#: inc/Features/Retreats/PostType.php:30
 msgid "No Retreats found in Trash"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:31
+#: inc/Features/Retreats/PostType.php:31
 msgid "Parent Retreat:"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:22
+#: src/editor-plugins/stripe/Plugin.tsx:195
+msgid "Price"
+msgstr ""
+
+#: src/editor-plugins/stripe/Plugin.tsx:28
+msgid "Prices"
+msgstr ""
+
+#: inc/Features/Retreats/PostType.php:22
 msgid "Retreat"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:38
+#: inc/Features/Retreats/PostType.php:38
 msgid "Retreat offerings"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:21
-#: inc/PostTypes/Retreat/PostType.php:32
+#: inc/Features/Retreats/PostType.php:21
+#: inc/Features/Retreats/PostType.php:32
 msgid "Retreats"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:28
+#: src/editor-plugins/stripe/Plugin.tsx:204
+msgid "Save changes"
+msgstr ""
+
+#: inc/Features/Retreats/PostType.php:28
 msgid "Search Retreats"
 msgstr ""
 
@@ -74,6 +124,10 @@ msgstr ""
 msgid "Styrsö Missionskyrka Admin"
 msgstr ""
 
-#: inc/PostTypes/Retreat/PostType.php:27
+#: inc/Features/Retreats/PostType.php:27
 msgid "View Retreat"
+msgstr ""
+
+# THIS TRANSLATION IS NO LONGER REFERENCED INSIDE YOUR PROJECT
+msgid "Edit prices"
 msgstr ""
