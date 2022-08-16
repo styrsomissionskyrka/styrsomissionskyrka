@@ -28,7 +28,7 @@ function createUseAttributeHook<Schema extends z.ZodTypeAny, Type extends z.infe
           return editPost({ [key]: setter });
         }
       },
-      [editPost, key],
+      [editPost, key, value],
     );
 
     return [value, setAttribute] as const;
