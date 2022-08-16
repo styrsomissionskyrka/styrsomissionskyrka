@@ -163,12 +163,13 @@ const ProductSection: React.FC<{
               {product?.name ?? 'New product'}
             </span>
             <span style={{ fontWeight: 400, marginLeft: 4, flex: 'none' }}>
-              ({formatPrice(proxy.price)} kr) <span style={{ color: 'red' }}>{isDirty ? '*' : ''}</span>
+              ({formatPrice(proxy.price, product?.default_price?.currency ?? 'sek')}){' '}
+              <span style={{ color: 'red' }}>{isDirty ? '*' : ''}</span>
             </span>
           </Fragment>
         ) as unknown as string
       }
-      initialOpen={product == null}
+      initialOpen={product != null}
     >
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="product_id" value={product?.id ?? '__new__'} />
@@ -190,6 +191,7 @@ const ProductSection: React.FC<{
           name="product_price"
           label="Price"
           value={proxy.price}
+          currency={product?.default_price?.currency ?? 'sek'}
           onChange={(value) => updateProduct('price', Number(value))}
         />
 

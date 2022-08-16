@@ -11,6 +11,8 @@ class Core implements ActionHookSubscriber, FilterHookSubscriber
   {
     return [
       'init' => ['loadThemeTextdomain'],
+      'wp_head' => ['injectLocale'],
+      'admin_head' => ['injectLocale'],
     ];
   }
 
@@ -24,6 +26,12 @@ class Core implements ActionHookSubscriber, FilterHookSubscriber
   public function loadThemeTextdomain()
   {
     \load_theme_textdomain('smk', \get_template_directory() . '/languages');
+  }
+
+  public function injectLocale()
+  {
+    $locale = \get_locale();
+    echo '<script type="text/javascript">window.site_locale = "' . $locale . '".replace("_", "-");</script>';
   }
 
   /**
