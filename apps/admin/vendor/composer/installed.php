@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '7616934e2bc5507633a6a7535f4d2a0d9bb4d3ff',
+        'reference' => 'e014cd9752ba2fd47d3d182451928f621e029547',
         'name' => 'styrsomissionskyrka/admin',
         'dev' => true,
     ),
@@ -38,12 +38,12 @@
             'dev_requirement' => true,
         ),
         'stripe/stripe-php' => array(
-            'pretty_version' => 'v7.128.0',
-            'version' => '7.128.0.0',
+            'pretty_version' => 'v9.1.0',
+            'version' => '9.1.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../stripe/stripe-php',
             'aliases' => array(),
-            'reference' => 'c704949c49b72985c76cc61063aa26fefbd2724e',
+            'reference' => '5dd4a247b56e5006ffe877e3749eb800d936dd19',
             'dev_requirement' => false,
         ),
         'styrsomissionskyrka/admin' => array(
@@ -52,7 +52,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '7616934e2bc5507633a6a7535f4d2a0d9bb4d3ff',
+            'reference' => 'e014cd9752ba2fd47d3d182451928f621e029547',
             'dev_requirement' => false,
         ),
         'tburry/pquery' => array(
