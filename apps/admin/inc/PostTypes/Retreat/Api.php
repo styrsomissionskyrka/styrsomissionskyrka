@@ -52,6 +52,12 @@ class Api implements ActionHookSubscriber
       'callback' => [$this, 'updateProduct'],
       'permission_callback' => [$this, 'checkPermissions'],
     ]);
+
+    \register_rest_route($namespace, '/(?P<post_id>[\d|\w]+)/products/(?P<product_id>[\d|\w]+)/activate', [
+      'methods' => \WP_REST_Server::EDITABLE,
+      'callback' => [$this, 'activateProduct'],
+      'permission_callback' => [$this, 'checkPermissions'],
+    ]);
   }
 
   /**
@@ -142,6 +148,19 @@ class Api implements ActionHookSubscriber
       $product->updateAttributes(['default_price' => $new_price->id]);
       $product->save();
     }
+
+    return new \WP_REST_Response($product->jsonSerialize(), 200);
+  }
+
+  public function activateProduct(\WP_REST_Request $request): \WP_REST_Response
+  {
+    $product_id = $request->get_param('product_id');
+    $activate = $request->get_json_params()['activate'] ?? true;
+
+    $product = $this->stripe_client->products->update($product_id, [
+      'active' => $activate,
+      'expand' => ['default_price'],
+    ]);
 
     return new \WP_REST_Response($product->jsonSerialize(), 200);
   }

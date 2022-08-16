@@ -18,7 +18,7 @@ import { useRetreatAttribute } from '../../hooks/use-post-attribute';
 import { QueryClientProvider, useMutation, useQuery, useQueryClient } from '../../react-query';
 import { Product } from '../../types/stripe';
 import { formatPrice } from '../../utils/prices';
-import { createProduct, getProducts, updateProduct } from './api';
+import { createProduct, getProducts, toggleProduct, updateProduct } from './api';
 
 export const Plugin: React.FC<{ name: string; icon: Dashicon.Icon }> = ({ name, icon }) => {
   let [postId] = useRetreatAttribute('id');
@@ -36,11 +36,11 @@ const Sidebar: React.FC<{ postId: number }> = ({ postId }) => {
   let [addNew, setAddNew] = useState(false);
 
   let client = useQueryClient();
-  let query = useQuery(['products', postId], () => getProducts(postId));
+  let products = useQuery(['products', postId], () => getProducts(postId));
 
   let createProductMutation = useMutation((data: FormProduct) => createProduct(postId, data), {
     onSuccess(data) {
-      client.setQueryData(['products', postId], [...(query.data ?? []), data]);
+      client.setQueryData(['products', postId], [...(products.data ?? []), data]);
     },
     onSettled() {
       setAddNew(false);
@@ -53,7 +53,19 @@ const Sidebar: React.FC<{ postId: number }> = ({ postId }) => {
       onSuccess(data) {
         client.setQueryData(
           ['products', postId],
-          (query.data ?? []).map((product) => (product.id === data.id ? data : product)),
+          (products.data ?? []).map((product) => (product.id === data.id ? data : product)),
+        );
+      },
+    },
+  );
+
+  let activateProductMutation = useMutation(
+    ({ productId, activate }: { productId: string; activate: boolean }) => toggleProduct(postId, productId, activate),
+    {
+      onSuccess(data) {
+        client.setQueryData(
+          ['products', postId],
+          (products.data ?? []).map((product) => (product.id === data.id ? data : product)),
         );
       },
     },
@@ -61,28 +73,20 @@ const Sidebar: React.FC<{ postId: number }> = ({ postId }) => {
 
   return (
     <Fragment>
-      <SectionHead hasMoreThanOne={(query.data?.length ?? 0) > 0} addProduct={() => setAddNew(true)} />
+      <SectionHead hasMoreThanOne={(products.data?.length ?? 0) > 0} addProduct={() => setAddNew(true)} />
 
       {addNew ? (
         <Panel>
           <ProductSection
-            isCreateNew
-            onSubmit={(product) => {
-              createProductMutation.mutate(product);
-            }}
-            onActivate={(id) => {
-              // void
-            }}
-            onDeactivate={() => {
-              // void
-            }}
+            onSubmit={(product) => createProductMutation.mutate(product)}
+            onCancelNew={() => setAddNew(false)}
           />
         </Panel>
       ) : null}
 
-      {query.status === 'success' && (
+      {products.status === 'success' && (
         <Panel>
-          {query.data.map((product) => (
+          {products.data.map((product) => (
             <ProductSection
               key={product.id}
               product={product}
@@ -90,10 +94,10 @@ const Sidebar: React.FC<{ postId: number }> = ({ postId }) => {
                 updateProductMutation.mutate({ productId: product.id, data });
               }}
               onActivate={(id) => {
-                // void
+                activateProductMutation.mutate({ productId: id, activate: true });
               }}
               onDeactivate={(id) => {
-                // void
+                activateProductMutation.mutate({ productId: id, activate: false });
               }}
             />
           ))}
@@ -127,11 +131,11 @@ type FormProduct = {
 
 const ProductSection: React.FC<{
   product?: Product;
-  isCreateNew?: boolean;
   onSubmit: (product: FormProduct) => void;
-  onActivate: (id: string) => void;
-  onDeactivate: (id: string) => void;
-}> = ({ product, isCreateNew = false, onSubmit, onActivate, onDeactivate }) => {
+  onActivate?: (id: string) => void;
+  onDeactivate?: (id: string) => void;
+  onCancelNew?: () => void;
+}> = ({ product, onSubmit, onActivate, onDeactivate, onCancelNew }) => {
   let initial = {
     name: product?.name ?? '',
     description: product?.description ?? '',
@@ -155,13 +159,16 @@ const ProductSection: React.FC<{
       title={
         (
           <Fragment>
-            {product?.name ?? 'New product'}{' '}
-            <span style={{ fontWeight: 400, marginLeft: 4, flex: 'none' }}> ({formatPrice(proxy.price)} kr)</span>{' '}
-            <span style={{ color: 'red' }}>{isDirty ? '*' : ''}</span>
+            <span style={{ color: product != null && !product.active ? 'gray' : undefined }}>
+              {product?.name ?? 'New product'}
+            </span>
+            <span style={{ fontWeight: 400, marginLeft: 4, flex: 'none' }}>
+              ({formatPrice(proxy.price)} kr) <span style={{ color: 'red' }}>{isDirty ? '*' : ''}</span>
+            </span>
           </Fragment>
         ) as unknown as string
       }
-      initialOpen={isCreateNew}
+      initialOpen={product == null}
     >
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="product_id" value={product?.id ?? '__new__'} />
@@ -191,24 +198,22 @@ const ProductSection: React.FC<{
             <Button type="submit" variant="secondary" isSmall disabled={!isDirty}>
               Save changes
             </Button>
-            {product != null ? (
-              <Fragment>
-                {product.active ? (
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    isDestructive
-                    isSmall
-                    onClick={() => onDeactivate(product.id)}
-                  >
-                    Deactive price
-                  </Button>
-                ) : (
-                  <Button type="button" variant="secondary" isSmall onClick={() => onActivate(product.id)}>
-                    Activate price
-                  </Button>
-                )}
-              </Fragment>
+            {product != null && product.active && onDeactivate != null ? (
+              <Button type="button" variant="secondary" isDestructive isSmall onClick={() => onDeactivate(product.id)}>
+                Deactive price
+              </Button>
+            ) : null}
+
+            {product != null && !product.active && onActivate != null ? (
+              <Button type="button" variant="secondary" isSmall onClick={() => onActivate(product.id)}>
+                Activate price
+              </Button>
+            ) : null}
+
+            {product == null && onCancelNew != null ? (
+              <Button type="button" variant="secondary" isDestructive isSmall onClick={() => onCancelNew()}>
+                Cancel
+              </Button>
             ) : null}
           </ButtonGroup>
         </Flex>

@@ -37,8 +37,18 @@ export async function updateProduct(
 ) {
   let response = await apiFetch({
     path: `/retreat-pricing/v1/${postId}/products/${productId}`,
-    method: 'POST',
+    method: 'PUT',
     data: product,
+  });
+
+  return ProductSchema.parse(response);
+}
+
+export async function toggleProduct(postId: number, productId: string, activate: boolean) {
+  let response = await apiFetch({
+    path: `/retreat-pricing/v1/${postId}/products/${productId}/activate`,
+    method: 'PUT',
+    data: { activate },
   });
 
   return ProductSchema.parse(response);
