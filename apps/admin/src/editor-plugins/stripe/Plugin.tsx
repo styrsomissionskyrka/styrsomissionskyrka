@@ -10,47 +10,96 @@ import {
   TextareaControl,
 } from '@wordpress/components';
 import { PluginSidebar } from '@wordpress/edit-post';
-import { Fragment, useState } from 'react';
+import equal from 'fast-deep-equal';
+import React, { Fragment, useState } from 'react';
 
 import { PriceControl } from '../../components';
+import { useRetreatAttribute } from '../../hooks/use-post-attribute';
+import { QueryClientProvider, useMutation, useQuery, useQueryClient } from '../../react-query';
+import { Product } from '../../types/stripe';
 import { formatPrice } from '../../utils/prices';
-
-type Product = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-};
+import { createProduct, getProducts, updateProduct } from './api';
 
 export const Plugin: React.FC<{ name: string; icon: Dashicon.Icon }> = ({ name, icon }) => {
-  let [products, setProducts] = useState<Product[]>([{ id: '0', name: 'New price', description: '', price: 0 }]);
+  let [postId] = useRetreatAttribute('id');
 
   return (
     <PluginSidebar name={name} title="Edit prices" icon={icon}>
-      <SectionHead
-        hasMoreThanOne={products.length > 0}
-        addProduct={() => {
-          setProducts(
-            products.concat({ id: products.length.toString(), name: 'New price', description: '', price: 0 }),
-          );
-        }}
-      />
+      <QueryClientProvider>
+        <Sidebar postId={postId} />
+      </QueryClientProvider>
+    </PluginSidebar>
+  );
+};
 
-      <Panel>
-        {products.map((product) => (
+const Sidebar: React.FC<{ postId: number }> = ({ postId }) => {
+  let [addNew, setAddNew] = useState(false);
+
+  let client = useQueryClient();
+  let query = useQuery(['products', postId], () => getProducts(postId));
+
+  let createProductMutation = useMutation((data: FormProduct) => createProduct(postId, data), {
+    onSuccess(data) {
+      client.setQueryData(['products', postId], [...(query.data ?? []), data]);
+    },
+    onSettled() {
+      setAddNew(false);
+    },
+  });
+
+  let updateProductMutation = useMutation(
+    ({ productId, data }: { productId: string; data: FormProduct }) => updateProduct(postId, productId, data),
+    {
+      onSuccess(data) {
+        client.setQueryData(
+          ['products', postId],
+          (query.data ?? []).map((product) => (product.id === data.id ? data : product)),
+        );
+      },
+    },
+  );
+
+  return (
+    <Fragment>
+      <SectionHead hasMoreThanOne={(query.data?.length ?? 0) > 0} addProduct={() => setAddNew(true)} />
+
+      {addNew ? (
+        <Panel>
           <ProductSection
-            key={product.id}
-            product={product}
-            onRemove={(id) => {
-              setProducts(products.filter((previous) => previous.id !== id));
+            isCreateNew
+            onSubmit={(product) => {
+              createProductMutation.mutate(product);
             }}
-            onSave={(next) => {
-              setProducts(products.map((previous) => (previous.id === next.id ? next : previous)));
+            onActivate={(id) => {
+              // void
+            }}
+            onDeactivate={() => {
+              // void
             }}
           />
-        ))}
-      </Panel>
-    </PluginSidebar>
+        </Panel>
+      ) : null}
+
+      {query.status === 'success' && (
+        <Panel>
+          {query.data.map((product) => (
+            <ProductSection
+              key={product.id}
+              product={product}
+              onSubmit={(data) => {
+                updateProductMutation.mutate({ productId: product.id, data });
+              }}
+              onActivate={(id) => {
+                // void
+              }}
+              onDeactivate={(id) => {
+                // void
+              }}
+            />
+          ))}
+        </Panel>
+      )}
+    </Fragment>
   );
 };
 
@@ -70,33 +119,52 @@ const SectionHead: React.FC<{ addProduct: () => void; hasMoreThanOne: boolean }>
   );
 };
 
-const ProductSection: React.FC<{
-  product: Product;
-  onSave: (next: Product) => void;
-  onRemove: (id: string) => void;
-}> = ({ product, onSave, onRemove }) => {
-  let [proxy, setProxy] = useState(product);
-  let areEqual = deepEqual(proxy, product);
+type FormProduct = {
+  name: string;
+  description: string;
+  price: number;
+};
 
-  function updateProduct<Key extends keyof Product>(key: Key, value: Product[Key]) {
+const ProductSection: React.FC<{
+  product?: Product;
+  isCreateNew?: boolean;
+  onSubmit: (product: FormProduct) => void;
+  onActivate: (id: string) => void;
+  onDeactivate: (id: string) => void;
+}> = ({ product, isCreateNew = false, onSubmit, onActivate, onDeactivate }) => {
+  let initial = {
+    name: product?.name ?? '',
+    description: product?.description ?? '',
+    price: product?.default_price?.unit_amount ?? 0,
+  } as FormProduct;
+
+  let [proxy, setProxy] = useState(initial);
+  let isDirty = product == null || !equal(proxy, initial);
+
+  function updateProduct<Key extends keyof FormProduct>(key: Key, value: FormProduct[Key]) {
     setProxy((product) => ({ ...product, [key]: value }));
   }
 
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    onSubmit(proxy);
+  };
+
   return (
     <PanelBody
-      key={proxy.id}
       title={
         (
           <Fragment>
-            {product.name} <span style={{ fontWeight: 400, marginLeft: 4 }}> ({formatPrice(proxy.price)} kr)</span>{' '}
-            <span style={{ color: 'red' }}>{areEqual ? '' : '*'}</span>
+            {product?.name ?? 'New product'}{' '}
+            <span style={{ fontWeight: 400, marginLeft: 4, flex: 'none' }}> ({formatPrice(proxy.price)} kr)</span>{' '}
+            <span style={{ color: 'red' }}>{isDirty ? '*' : ''}</span>
           </Fragment>
         ) as unknown as string
       }
-      initialOpen={true}
+      initialOpen={isCreateNew}
     >
-      <form>
-        <input type="hidden" name="product_id" value={proxy.id} />
+      <form onSubmit={handleSubmit}>
+        <input type="hidden" name="product_id" value={product?.id ?? '__new__'} />
         <TextControl
           name="product_name"
           label="Name"
@@ -120,24 +188,31 @@ const ProductSection: React.FC<{
 
         <Flex justify="flex-end">
           <ButtonGroup>
-            <Button type="submit" variant="secondary" isSmall onClick={() => onSave(proxy)} disabled={areEqual}>
+            <Button type="submit" variant="secondary" isSmall disabled={!isDirty}>
               Save changes
             </Button>
-            <Button type="button" variant="secondary" isDestructive isSmall onClick={() => onRemove(proxy.id)}>
-              Remove price
-            </Button>
+            {product != null ? (
+              <Fragment>
+                {product.active ? (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    isDestructive
+                    isSmall
+                    onClick={() => onDeactivate(product.id)}
+                  >
+                    Deactive price
+                  </Button>
+                ) : (
+                  <Button type="button" variant="secondary" isSmall onClick={() => onActivate(product.id)}>
+                    Activate price
+                  </Button>
+                )}
+              </Fragment>
+            ) : null}
           </ButtonGroup>
         </Flex>
       </form>
     </PanelBody>
   );
 };
-
-function deepEqual(a: Product, b: Product): a is typeof b {
-  let keys = Object.keys(a) as (keyof Product)[];
-  for (let key of keys) {
-    if (a[key] !== b[key]) return false;
-  }
-
-  return true;
-}

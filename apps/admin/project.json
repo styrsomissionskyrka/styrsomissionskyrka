@@ -30,7 +30,7 @@
     "wp-start": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "wp-env start --xdebug",
+        "command": "wp-env start --xdebug --update",
         "cwd": "apps/admin"
       }
     },

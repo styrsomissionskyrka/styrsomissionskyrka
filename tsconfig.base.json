@@ -16,6 +16,7 @@
     "strict": true,
     "baseUrl": ".",
     "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@smk/wp-types": ["libs/wp-types/src/index.ts"]
     }

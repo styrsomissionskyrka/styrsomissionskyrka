@@ -2,3 +2,4 @@
 dist
 *.mo
 AssetLoader.php
+.wp-env.override.json

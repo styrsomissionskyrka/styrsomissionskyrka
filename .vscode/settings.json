@@ -1,5 +1,5 @@
 {
   // This allows Intelephens to index all WP files and gives you code completion
   "intelephense.environment.includePaths": ["${workspaceFolder}/apps/admin/.wp"],
-  "phpcs.executablePath": "apps/styrsomissionskyrka-admin/vendor/bin/phpcs"
+  "phpcs.executablePath": "apps/admin/vendor/bin/phpcs"
 }

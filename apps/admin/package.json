@@ -1,7 +1,3 @@
 {
-  "name": "@styrsomissionskyrka/admin",
-  "devDependencies": {
-    "@types/wordpress__api-fetch": "^3.23.1",
-    "@types/wordpress__data": "^6.0.1"
-  }
+  "name": "@styrsomissionskyrka/admin"
 }

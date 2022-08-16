@@ -11,7 +11,7 @@
       "port": 9003,
       "pathMappings": {
         "/var/www/html/wp-content/themes/admin": "${workspaceFolder}/apps/admin",
-        "/var/www/html": "${workspaceFolder}/.wp"
+        "/var/www/html": "${workspaceFolder}/apps/admin/.wp"
       }
     }
   ]
