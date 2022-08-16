@@ -18,6 +18,6 @@ class Editor implements ActionHookSubscriber
 
   public function enqueuStripePlugin()
   {
-    AssetLoader::enqueue('plugin-stripe', [], true);
+    AssetLoader::enqueue('editor-plugin-stripe', [], true);
   }
 }

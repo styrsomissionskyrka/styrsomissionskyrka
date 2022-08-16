@@ -1,7 +1,7 @@
 {
   "entryPoints": {
     "admin": "src/admin.ts",
-    "plugin-stripe": "src/plugins/stripe/index.ts"
+    "editor-plugin-stripe": "src/editor-plugins/stripe/index.ts"
   },
   "outdir": "dist",
   "sourcemap": true,
